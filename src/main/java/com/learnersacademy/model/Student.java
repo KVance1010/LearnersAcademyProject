@@ -1,10 +1,17 @@
 package com.learnersacademy.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -27,6 +34,11 @@ public class Student {
 	@Column(name = "email")
 	private String email;
 
-
+	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST,
+			   CascadeType.MERGE }, fetch = FetchType.LAZY)
+	@JoinTable(name = "courses_students",
+	           joinColumns = @JoinColumn(name = "student_id"),
+	           inverseJoinColumns = @JoinColumn(name = "course_id"))
+	private List<Course> courses;
 
 }

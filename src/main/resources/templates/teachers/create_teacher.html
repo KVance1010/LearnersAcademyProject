@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeafe.org">
+
+<!-- Header link -->
+<head th:replace="layouts :: header"></head>
+
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		
+		<!-- Brand link -->
+		<a th:replace="layouts :: brand"></a>
+
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Nav bar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/teachers}">Instructor Management</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	
+	<br><br>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class="text-center"> Add Instructor </h1>
+				<div class="card-body">
+					<form th:action="@{/teachers}" th:object="${teacher}" method="POST">
+
+						<div th:replace="layouts :: firstName"> </div>
+
+						<div th:replace="layouts :: lastName"> </div>
+
+						<div th:replace="layouts :: phoneNumber"> </div>
+
+						<div th:replace="layouts :: email"> </div>
+
+						<div th:replace= "layouts :: footerButton"> </div>
+						
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

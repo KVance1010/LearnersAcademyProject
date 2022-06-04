@@ -1,4 +1,4 @@
-package com.learnersacademy.dto;
+package com.learnersacademy.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://thymeLeafe.org">
+
+<!-- Header -->
+<head th:fragment="header">
+	<meta charset="ISO-8859-1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Learner's Academy</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<!-- Brand -->
+<a th:fragment="brand" class="navbar-brand" href="#"> Learner's Academy</a>
+
+<!-- First name field -->
+<div th:fragment="firstName" class="form-group">
+	<label> First Name </label>
+	<input type="text" name="firstName" th:field="*{firstName}" class="form-control"
+		placeholder="First Name" />
+</div>
+
+<!-- Last name field -->
+<div th:fragment="lastName" class="form-group">
+	<label> Last Name </label>
+	<input type="text" name="lastName" th:field="*{lastName}" class="form-control"
+		placeholder="Last Name" />
+</div>
+
+<!-- Phone number field -->
+<div th:fragment="phoneNumber" class="form-group">
+	<label> Phone Number </label>
+	<input type="text" name="phoneNumber" th:field="*{phoneNumber}" class="form-control" placeholder="xxx-xxx-xxxx" />
+</div>
+
+<!-- Email field -->
+<div th:fragment="email" class="form-group">
+	<label> Email </label>
+	<input type="text" name="email" th:field="*{email}" class="form-control" placeholder="Email" />
+</div>
+
+<!-- Submit footer button -->
+<div th:fragment="footerButton" class="box-footer">
+	<button type="submit" class="btn btn-primary">
+		Submit
+	</button>
+</div>
+
+
+</html>

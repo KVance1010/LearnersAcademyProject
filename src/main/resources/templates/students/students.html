@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://thymeLeafe.org">
+
+<head th:replace="layouts :: header"></head>
+
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+
+		<!-- Brand -->
+		<a th:replace="layouts :: brand"></a>
+
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Nav bar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/students}">Student Management</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/teachers}">Instructor Management</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<h1> Students List </h1>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-4">
+				<!-- this is how you make an anchor tag in ThymeLeafe -->
+				<!-- /students/new is for request url  ...  class is for bootstrap button-->
+				<a th:href="@{/students/new}" class="btn btn-primary btn-sm mb-4"> Add Student</a>
+			</div>
+		</div>
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th> First Name</th>
+					<th> Last Name</th>
+					<th> Phone Number</th>
+					<th> Email </th>
+					<th> Actions </th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="student: ${students}">
+					<td th:text="${student.firstName}"></td>
+					<td th:text="${student.lastName}"></td>
+					<td th:text="${student.phoneNumber}"></td>
+					<td th:text="${student.email}"></td>
+					<td>
+						<a th:href="@{/students/edit/{studentId}(studentId=${student.studentId})}"
+							class="btn btn-primary">Update</a>
+
+						<a th:href="@{/students/{studentId}(studentId=${student.studentId})}"
+							class="btn btn-danger">Delete</a>
+
+					</td>
+				</tr>
+			</tbody>
+
+		</table>
+
+	</div>
+</body>
+
+</html>

@@ -2,8 +2,8 @@
 
 <html xmlns:th="http://thymeLeafe.org">
 
-<!-- Header -->
-<head th:fragment="header">
+<!-- Head -->
+<head th:fragment="head">
 	<meta charset="ISO-8859-1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Learner's Academy</title>
@@ -11,22 +11,48 @@
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
+
+<!-- Main NavigationBar Header -->
+<nav th:fragment="nav-bar-header" class="navbar navbar-expand-md bg-dark navbar-dark">
+	<!-- Brand Link -->
+	<a class="navbar-brand" href="#"> Learner's Academy</a>
+	<!-- Toggler/collapsibe Button -->
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<!-- Nav bar links -->
+	<div class="collapse navbar-collapse" id="collapsibleNavbar">
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link" th:href="@{/students}">Student Management </a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" th:href="@{/teachers}">Instructor Management </a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" th:href="@{/courses-subjects}">Subject and Course List </a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
 <!-- Brand -->
 <a th:fragment="brand" class="navbar-brand" href="#"> Learner's Academy</a>
 
 <!-- First name field -->
 <div th:fragment="firstName" class="form-group">
 	<label> First Name </label>
-	<input type="text" name="firstName" th:field="*{firstName}" class="form-control"
-		placeholder="First Name" />
+	<input type="text" name="firstName" th:field="*{firstName}" class="form-control" placeholder="First Name" />
 </div>
+
 
 <!-- Last name field -->
 <div th:fragment="lastName" class="form-group">
 	<label> Last Name </label>
-	<input type="text" name="lastName" th:field="*{lastName}" class="form-control"
-		placeholder="Last Name" />
+	<input type="text" name="lastName" th:field="*{lastName}" class="form-control" placeholder="Last Name" />
 </div>
+
 
 <!-- Phone number field -->
 <div th:fragment="phoneNumber" class="form-group">
@@ -34,11 +60,13 @@
 	<input type="text" name="phoneNumber" th:field="*{phoneNumber}" class="form-control" placeholder="xxx-xxx-xxxx" />
 </div>
 
+
 <!-- Email field -->
 <div th:fragment="email" class="form-group">
 	<label> Email </label>
 	<input type="text" name="email" th:field="*{email}" class="form-control" placeholder="Email" />
 </div>
+
 
 <!-- Submit footer button -->
 <div th:fragment="footerButton" class="box-footer">
@@ -46,6 +74,7 @@
 		Submit
 	</button>
 </div>
+
 
 
 </html>

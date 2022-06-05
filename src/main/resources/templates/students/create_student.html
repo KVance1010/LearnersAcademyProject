@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeLeafe.org">
-
-<!-- Header  link -->
-<head th:replace="layouts :: header"></head>
+                <!-- Head -->
+<head th:replace="layouts :: head"></head>
 
 <body>
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-
-		<!-- Brand link -->
+		<!-- Brand Link -->
 		<a th:replace="layouts :: brand"></a>
-
-		<!-- Toggler/collapsibe Button -->
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+		<!-- Navigation header Toggler/collapsibe Button -->
+	 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-
 		<!-- Nav bar links -->
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
@@ -26,6 +22,7 @@
 	</nav>
 
 	<br><br>
+
 
 	<div class="container">
 		<div class="row">

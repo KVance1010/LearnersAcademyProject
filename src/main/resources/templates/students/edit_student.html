@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeLeafe.org">
+<!-- Head -->
 
-<head th:replace="layouts :: header"></head>
+<head th:replace="layouts :: head"></head>
 
 <body>
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
 		<!-- Brand Link -->
 		<a th:replace="layouts :: brand"></a>
-
 		<!-- Toggler/collapsibe Button -->
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-
 		<!-- Nav bar links -->
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
@@ -22,16 +21,17 @@
 			</ul>
 		</div>
 	</nav>
-	
+
 	<br><br>
-	
+
 	<div class="container">
 		<div class="row">
 			<!-- col-lg ect resizes the application for different screens -->
 			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
 				<h1 class="text-center"> Update Student </h1>
 				<div class="card-body">
-					<form th:action="@{/students/{studentId} (studentId=${student.studentId}) }" th:object = "${student}" method="POST">
+					<form th:action="@{/students/{studentId} (studentId=${student.studentId}) }" th:object="${student}"
+						method="POST">
 
 						<div th:replace="layouts :: firstName"> </div>
 

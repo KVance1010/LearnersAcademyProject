@@ -42,8 +42,8 @@ public class StudentListController {
 	@GetMapping("/students/edit/{studentId}")
 	public String editStudentForm(@PathVariable Long studentId, Model model) {
 		model.addAttribute("student", studentRepository.findById(studentId).get());
-		return "/students/edit_student";
-	}
+		return "/students/edit_student";    // added students for the file path. html file is in a folder
+	} 
 
 	@PostMapping("/students/{studentId}")
 	public String updateStudent(@PathVariable Long studentId, @ModelAttribute("student") Student student, Model model) {

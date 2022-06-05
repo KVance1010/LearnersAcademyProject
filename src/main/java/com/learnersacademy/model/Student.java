@@ -35,7 +35,7 @@ public class Student {
 	private String email;
 
 	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST,
-			   CascadeType.MERGE }, fetch = FetchType.LAZY)
+			   CascadeType.MERGE}, fetch = FetchType.LAZY)
 	@JoinTable(name = "courses_students",
 	           joinColumns = @JoinColumn(name = "student_id"),
 	           inverseJoinColumns = @JoinColumn(name = "course_id"))

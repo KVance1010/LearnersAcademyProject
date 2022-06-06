@@ -27,7 +27,7 @@ public class TeachersController {
 	public String createTeacherForm(Model model) { 
 		Teacher teacher = new Teacher();
 		model.addAttribute("teacher", teacher);
-		return "/teachers/create_teacher";
+		return "/teachers/create-teacher";
 	}
 
 	@PostMapping("/teachers")
@@ -39,7 +39,7 @@ public class TeachersController {
 	@GetMapping("/teachers/edit/{teacherId}")
 	public String editTeacherForm(@PathVariable Long teacherId, Model model) {
 		model.addAttribute("teacher", teacherRepository.findById(teacherId).get());
-		return "/teachers/edit_teacher";
+		return "/teachers/edit-teacher";
 	}
 
 	@PostMapping("/teachers/{teacherId}")

@@ -22,7 +22,7 @@ public class CourseListController {
 	public String listCoursesAndSubjects(Model model1, Model model2) {
 		model1.addAttribute("subjects", subjectRepository.findAll());
 		model2.addAttribute("courses", courseRepository.findAll());
-		return "/courseSubject/courseSubjectList";
+		return "/courseSubject/course-subject-list";
 	}
 
 

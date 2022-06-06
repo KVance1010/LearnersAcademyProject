@@ -29,7 +29,7 @@ public class StudentListController {
 		// create student object to hold student form data
 		Student student = new Student();
 		model.addAttribute("student", student);
-		return "/students/create_student";
+		return "/students/create-student";
 	}
 
 	// mapping HTTP POST requests
@@ -42,7 +42,7 @@ public class StudentListController {
 	@GetMapping("/students/edit/{studentId}")
 	public String editStudentForm(@PathVariable Long studentId, Model model) {
 		model.addAttribute("student", studentRepository.findById(studentId).get());
-		return "/students/edit_student";    // added students for the file path. html file is in a folder
+		return "/students/edit-student";    // added students for the file path. html file is in a folder
 	} 
 
 	@PostMapping("/students/{studentId}")

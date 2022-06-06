@@ -16,87 +16,95 @@
 			<h1> Subject List </h1>
 		</div>
 		<div class="row">
-			<div class="col-lg-4" >
-				<a th:href="@{/create/new}" class="btn btn-primary btn-sm mb-3"> Add Subject </a>
+			<div style="padding-left: 21%">
+				<form>
+					<input type="text" placeholder="Add Subject">
+					<button class="btn btn-primary">Add</button>
+				</form>
 			</div>
-			<div style = "padding-left: 40%">
-			<form>
-				<input type="text"  placeholder="Subject Name">
-				<button class="btn btn-primary" >search</button>
-			</form>
+			<div style="padding-left: 2%">
+				<form>
+					<input type="text" placeholder="Delete Subject by name">
+					<button class="btn btn-danger">Delete</button>
+				</form>
+			</div>
+			<div style= "padding-left: 2%">
+				<form style= "padding-bottom: 3%">
+					<input type="text" placeholder="Subject Name">
+					<button class="btn btn-info">search</button>
+				</form>
 			</div>
 		</div>
-  
-			<table class="table table-striped table-bordered">
-				<thead class="table-dark">
-					<tr>
-						<th> Subjects </th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="subject: ${subjects}">
-						<td th:text="${subject.subjectName}"></td>
-						<td>
+		<table class="table table-striped table-bordered" >
+			<thead class="table-dark">
+				<tr>
+					<th> Subjects </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="subject: ${subjects}">
+					<td th:text="${subject.subjectName}"></td>
+					<td>
 
-							<!-- TODO: links to actual locations -->
-							<a th:href="@{/students/edit/{studentId}(studentId=${student.studentId})}"
-								class="btn btn-primary">Update</a>
-							<a th:href="@{/students/{studentId}(studentId=${student.studentId})}"
-								class="btn btn-danger">Delete</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+						<!-- TODO: links to actual locations -->
+						<a th:href="@{/students/edit/{studentId}(studentId=${student.studentId})}"
+							class="btn btn-primary">Update</a>
+						<a th:href="@{/students/{studentId}(studentId=${student.studentId})}"
+							class="btn btn-danger">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<h1> Course List </h1>
 		</div>
 
-		<div class="container">
-			<div class="row">
-				<h1> Course List </h1>
+		<div class="row">
+			<div class="col-lg-4">
+				<a th:href="@{/students/new}" class="btn btn-primary btn-sm mb-3"> Add Course</a>
 			</div>
-
-			<div class="row" >
-				<div class="col-lg-4">
-					<a th:href="@{/students/new}" class="btn btn-primary btn-sm mb-3"> Add Course</a>
-				</div>
-				<div style = "padding-left: 13%" >
-			<form>
-				<input type="text" placeholder="Course Id">
-				<button class="btn btn-primary" >search</button>
-			</form>
+			<div style="padding-left: 13%">
+				<form>
+					<input type="text" placeholder="Course Id">
+					<button class="btn btn-info">search</button>
+				</form>
 			</div>
-			<div style = "padding-left: 2%">
-			<form>
-				<input type="text"  placeholder="Course Name">
-				<button class="btn btn-primary" >search</button>
-			</form>
+			<div style="padding-left: 2%">
+				<form>
+					<input type="text" placeholder="Course Name">
+					<button class="btn btn-info">search</button>
+				</form>
 			</div>
-			</div>
-			<table class="table table-striped table-bordered">
-				<thead class="table-dark">
-					<tr>
-						<th> Course ID</th>
-						<th> Name</th>
-						<th> Description</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<tr th:each="course: ${course}">
-						<td th:text="${course.courseId}"></td>
-						<td th:text="${course.courseName}"></td>
-						<td th:text="${course.courseDescription}"></td>
-						<td>
-							<!-- TODO: links to actual locations -->
-							<a th:href="@{/students/edit/{studentId}(studentId=${student.studentId})}"
-								class="btn btn-primary">Update</a>
-							<a th:href="@{/students/{studentId}(studentId=${student.studentId})}"
-								class="btn btn-danger">Delete</a>
-
-						</td>
-					</tr>
-				</tbody>
-			</table>
 		</div>
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th> Course ID</th>
+					<th> Name</th>
+					<th> Description</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="course: ${course}">
+					<td th:text="${course.courseId}"></td>
+					<td th:text="${course.courseName}"></td>
+					<td th:text="${course.courseDescription}"></td>
+					<td>
+						<!-- TODO: links to actual locations -->
+						<a th:href="@{/students/edit/{studentId}(studentId=${student.studentId})}"
+							class="btn btn-primary">Update</a>
+						<a th:href="@{/students/{studentId}(studentId=${student.studentId})}"
+							class="btn btn-danger">Delete</a>
+
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </body>
 
 </html>

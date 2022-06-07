@@ -27,12 +27,17 @@ public class CourseListController {
 	// mapping HTTP GET requests
 	@GetMapping("/courses-subjects")
 	public String listCoursesAndSubjects(Model model) {
+		
 		List<Course> course = courseRepository.findAll();
+		
 		if (course != null) { model.addAttribute("condition2", Boolean.TRUE);}
 		else { model.addAttribute("condition2", Boolean.FALSE);}
+		
 		List<Subject> subject = subjectRepository.findAll();
+		
 		if (subject != null) { model.addAttribute("condition1", Boolean.TRUE);}
 		else { model.addAttribute("condition1", Boolean.FALSE);}
+		
 		model.addAttribute("subject", subject);
 		model.addAttribute("course", course);
 		return "/courseSubject/course-subject-list";
@@ -55,15 +60,10 @@ public class CourseListController {
 		}
 		
 		@PostMapping("/course/save")
-		public String createCourse(@PathVariable Long subjectId, @ModelAttribute("course") Course course, Model model){
-			Subject existingSubject = subjectRepository.findById(subjectId).get();
-			existingSubject.addCourse(course);
-			subjectRepository.save(existingSubject);
+		public String createCourse(Course course, Model model){
 			courseRepository.save(course);
 			return "redirect:/courses-subjects";
 		}
 		
-			
-	
 		
 }

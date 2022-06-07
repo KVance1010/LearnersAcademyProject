@@ -40,10 +40,9 @@ public class Subject {
 	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "subject")
 	private List <Course> coursesList;
 	
-	public void addCourse(Course course) {
-		coursesList.add(course);
+	public Integer courseCount() {
+		return coursesList.size();
 	}
-	public void removeCourse(Course course) {
-		coursesList.remove(course);
-	}
+	
+
 }

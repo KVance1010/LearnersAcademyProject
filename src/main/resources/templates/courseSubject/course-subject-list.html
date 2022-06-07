@@ -17,12 +17,12 @@
 		</div>
 		<div class="row">
 			<div style="padding-left: 48%">
-				<form  action ="/subject-save" >
-					<input type="text" id = "subjectName " name = "subjectName" placeholder="Add Subject Name">
+				<form action="/subject-save">
+					<input type="text" id="subjectName " name="subjectName" placeholder="Add Subject Name">
 					<button class="btn btn-primary"> Add </button>
 				</form>
 			</div>
-			
+
 			<div style="padding-left: 2%">
 				<form style="padding-bottom: 3%">
 					<input type="text" placeholder="Subject Name">
@@ -37,14 +37,19 @@
 				<tr>
 					<th> Subjects </th>
 					<th> Subject ID Number</th>
+					<th> Number of Courses</th>
 					<th> Actions </th>
 				</tr>
 			</thead>
-			<tbody th:if ="${condition1}">
+			<tbody th:if="${condition1}">
 				<tr th:each="subject: ${subject}">
 					<td th:text="${subject.subjectName}"></td>
 					<td th:text="${subject.subjectId}"></td>
+					<td th:text="${subject.courseCount()}"
+					<td></td>
 					<td>
+						<a th:href="@{/subject-show/{subjectId}(subjectId=${subject.subjectId})}"
+							class="btn btn-primary">Show Courses</a>
 						<a th:href="@{/subject-delete/{subjectId}(subjectId=${subject.subjectId})}"
 							class="btn btn-danger">Delete</a>
 					</td>
@@ -84,7 +89,7 @@
 				</tr>
 			</thead>
 
-			<tbody th:if ="${condition2}">
+			<tbody th:if="${condition2}">
 				<tr th:each="course: ${course}">
 					<td th:text="${course.courseId}"></td>
 					<td th:text="${course.courseName}"></td>

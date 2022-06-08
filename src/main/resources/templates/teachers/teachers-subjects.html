@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeLeafe.org">
-
 <!-- Head -->
 
 <head th:replace="layouts :: head"></head>
@@ -19,27 +18,23 @@
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/courses-subjects}">Subject and Course List</a>
+					<a class="nav-link" th:href="@{/teachers}">Instructor Management</a>
 				</li>
 			</ul>
 		</div>
 	</nav>
-	
-	<!--  this is the main body of the page -->
-	
-	<!--  this shows the subject name with a list of courses under it -->
-	<div class="container">
-		<div class="row">
-			<h1 th:text = "${subject.subjectName}"></h1>
-			<h1 style = "padding-left: 1%"> Courses</h1>
-		</div>
 
-		<div class="row">
-			<div class="col-lg-4">
-				<a th:href="@{/students/new}" class="btn btn-primary btn-sm mb-4"> Add Student</a>
-			</div>
+	<br><br>
+
+	<div class="container">
+	<div class="row">
+			<h1 th:text = "${teacher.firstName}"></h1>
+			<h1 style = "padding-left: 1%" th:text = "${teacher.lastName}"> </h1>
 		</div>
-		<table class="table table-striped table-bordered">
+		
+	</div>
+
+<table class="table table-striped table-bordered">
 			<thead class="table-dark">
 				<tr>
 					<th> Course ID</th>
@@ -51,9 +46,9 @@
 			</thead>
 
 			<tbody>
-				<tr th:each="course: ${course}">
-					<td th:text="${course.courseId}"></td>
-					<td th:text="${course.courseName}"></td>
+				<tr th:each="subject: ${subject}">
+					<td th:text="${subject.subjectId}"></td>
+					<td th:text="${subject.subjectName}"></td>
 					
 <!-- *****************TODO: need to add  TEACHERS and Number of student  *****************-->
 
@@ -76,7 +71,6 @@
 
 		</table>
 
-	</div>
 </body>
 
 </html>

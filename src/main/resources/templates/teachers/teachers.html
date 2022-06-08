@@ -15,7 +15,7 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-4">
-				<a th:href="@{/teachers/new}" class="btn btn-primary btn-sm mb-4"> Add Teacher</a>
+				<a th:href="@{/teachers/new}" class="btn btn-primary btn-sm mb-4"> Add Instructor</a>
 			</div>
 		</div>
 
@@ -41,7 +41,8 @@
 					<td>
 						<a th:href="@{/teachers/edit/{teacherId}(teacherId=${teacher.teacherId})}"
 							class="btn btn-primary">Update</a>
-
+						<a th:href="@{/teacher-subjects/{teacherId}(teacherId=${teacher.teacherId})}"
+							class="btn btn-info">Add Subjects taught</a>
 						<a th:href="@{/teachers/{teacherId}(teacherId=${teacher.teacherId})}"
 							class="btn btn-danger">Delete</a>
 

@@ -27,14 +27,13 @@
 
 
 	<div class = "container">
-                                  <!-- th:object must be referenced in the controller -->
+                                  
       <form th:action="@{/course/save}" th:object ="${course}"  method = "POST">
-                                                      <!-- th:field must match model object -->
+                                                      
          <input type = "text" placeholder = "Course Name" th:field = "${course.courseName}">
          
          <textarea th:type = "text" placeholder = "Enter course Description" th:field = "${course.description}" ></textarea>
          
-         <!-- * short hand to get all the employees vs the line below where we specify the path   -->
          <select th:field = "*{subject}" >
             <option th:each = "subject : ${subject}"
                     th:value = "${subject.subjectId}"

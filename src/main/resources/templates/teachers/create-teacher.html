@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeLeafe.org">
 
-             <!-- Head -->
+<!-- Head -->
+
 <head th:replace="layouts :: head"></head>
 
 <body>
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		
+
 		<!-- Brand link -->
 		<a th:replace="layouts :: brand"></a>
 
@@ -24,9 +25,9 @@
 			</ul>
 		</div>
 	</nav>
-	
+
 	<br><br>
-	
+
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
@@ -41,15 +42,29 @@
 						<div th:replace="layouts :: phoneNumber"> </div>
 
 						<div th:replace="layouts :: email"> </div>
+						<hr>
 
-						<div th:replace= "layouts :: footerButton"> </div>
-						
+						<div th:object="${subject}">
+							<div th:each="subject : ${subject}">
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" th:field="${subject}"
+										th:value="${subject.subjectId}">
+									<label class="form-check-label" th:text="${subject.subjectName}"></label>
+								</div>
+							</div>
+
+						</div>
+						<br>
+						<div th:replace="layouts :: footerButton"> </div>
+
 					</form>
 
 				</div>
 			</div>
 		</div>
 	</div>
+
+
 </body>
 
 </html>

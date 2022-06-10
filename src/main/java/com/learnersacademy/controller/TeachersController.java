@@ -41,8 +41,8 @@ public class TeachersController {
 	}
 
 	// Teacher Save method
-	@PostMapping("/teachers")
-	public String saveTeacher(@ModelAttribute("teacher") Teacher teacher) {
+	@PostMapping("/teachers-save")
+	public String saveTeacher(@ModelAttribute("teacher") Teacher teacher, Model model) {
 		teacherRepository.save(teacher);
 		return "redirect:/teachers";
 	}
@@ -62,6 +62,9 @@ public class TeachersController {
 		existingTeacher.setLastName(teacher.getLastName());
 		existingTeacher.setPhoneNumber(teacher.getPhoneNumber());
 		existingTeacher.setEmail(teacher.getEmail());
+		
+		// TODO: NEED to alter the list to save Subjects
+		
 		teacherRepository.save(existingTeacher);
 		return "redirect:/teachers";
 	}

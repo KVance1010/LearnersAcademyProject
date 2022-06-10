@@ -37,17 +37,14 @@
 <table class="table table-striped table-bordered">
 			<thead class="table-dark">
 				<tr>
-					<th> Course ID</th>
+					<th> Subject Name</th>
 					<th> Course Name</th>
-					<th> Teacher </th>
-					<th> Number of Students</th>
 					<th> Actions </th>
 				</tr>
 			</thead>
 
 			<tbody>
 				<tr th:each="subject: ${subject}">
-					<td th:text="${subject.subjectId}"></td>
 					<td th:text="${subject.subjectName}"></td>
 					
 <!-- *****************TODO: need to add  TEACHERS and Number of student  *****************-->

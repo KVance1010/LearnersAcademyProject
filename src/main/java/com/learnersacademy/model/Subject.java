@@ -33,8 +33,7 @@ public class Subject {
 	@Column(name = "subject_name")
 	private String subjectName;
 
-	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST,
-			CascadeType.MERGE }, fetch = FetchType.LAZY)
+	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
 	@JoinTable(name = "teachers_subjects",
 	           joinColumns = @JoinColumn(name = "subject_id"),
 	           inverseJoinColumns = @JoinColumn(name = "teacher_id"))
@@ -45,6 +44,10 @@ public class Subject {
 	
 	public Integer courseCount() {
 		return coursesList.size();
+	}
+	
+	public void addTeacher(Teacher teacher) {
+		teachers.add(teacher);
 	}
 	
 

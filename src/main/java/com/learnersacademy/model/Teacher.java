@@ -29,19 +29,27 @@ public class Teacher {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "teacher_id")
 	private Long teacherId;
+	
 	@Column(name = "first_name")
 	private String firstName;
 	@Column(name = "last_name")
 	private String lastName;
 	@Column(name = "phone_number")
 	private String phoneNumber;
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
 	private String email;
 
-	@ManyToMany (cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST,
-			     CascadeType.MERGE}, fetch = FetchType.LAZY)  
+	@ManyToMany (cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)  
 	@JoinTable(name="teachers_subjects", 
     joinColumns = @JoinColumn(name= "teacher_id"),          
     inverseJoinColumns = @JoinColumn(name="subject_id"))    
 	private List<Subject> subjects;
+	
+	public void addSubject(Subject subject) {
+		subjects.add(subject);
+	}
+	
+	public void deleteSubject(Subject subject) {
+		subjects.remove(subject);
+	}
 }

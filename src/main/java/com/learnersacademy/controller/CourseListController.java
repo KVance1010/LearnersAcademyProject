@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.learnersacademy.dao.CourseRepository;
 import com.learnersacademy.dao.SubjectRepository;
+import com.learnersacademy.dao.TeacherRepository;
 import com.learnersacademy.model.Course;
 import com.learnersacademy.model.Subject;
+import com.learnersacademy.model.Teacher;
 
 @Controller
 public class CourseListController {
@@ -24,27 +26,27 @@ public class CourseListController {
 
 	@Autowired
 	SubjectRepository subjectRepository;
+	
+	@Autowired
+	TeacherRepository teacherRepository;
 
 	// Main list of courses and subjects
 	@GetMapping("/courses-subjects")
 	public String listCoursesAndSubjects(Model model) {
-
+		
 		List<Course> course = courseRepository.findAll();
-
+		// this is not needed
 		if (course != null) {
 			model.addAttribute("condition2", Boolean.TRUE);
 		} else {
 			model.addAttribute("condition2", Boolean.FALSE);
 		}
-
 		List<Subject> subject = subjectRepository.findAll();
-
 		if (subject != null) {
 			model.addAttribute("condition1", Boolean.TRUE);
 		} else {
 			model.addAttribute("condition1", Boolean.FALSE);
 		}
-
 		model.addAttribute("subject", subject);
 		model.addAttribute("course", course);
 		return "/courseSubject/course-subject-list";
@@ -59,21 +61,11 @@ public class CourseListController {
 
 	// Add a Subject
 	@GetMapping("/subject-save")
-	public String addSubject(@RequestParam String subjectName ) {
+	public String addSubject(@RequestParam String subjectName) {
 		Subject subject = new Subject();
 		subject.setSubjectName(subjectName);
 		subjectRepository.save(subject);
 		return "redirect:/courses-subjects";
-	}
-	
-	// show a list of courses by subject
-	@GetMapping("/subject-show/{subjectId}")
-	public String showCourseBySubject(@PathVariable Long subjectId, @ModelAttribute("subject") Subject subject, Model model) { 
-		Subject existingSubject = subjectRepository.findById(subjectId).get();
-		List<Course> course = courseRepository.findBySubjectId(subjectId);
-		model.addAttribute("subject", existingSubject);
-		model.addAttribute("course", course);
-		return "/courseSubject/show-subject-courses";
 	}
 
 	// create a course
@@ -93,4 +85,33 @@ public class CourseListController {
 		return "redirect:/courses-subjects";
 	}
 
+	// Add a teacher to a subject and course
+	@GetMapping("/add-teacher/subject/{subjectId}/{courseId}")
+	public String AddTeacherToSubject(@PathVariable Long subjectId, @PathVariable Long courseId, @ModelAttribute("subject") Subject subject, Model model) {
+		Subject currentSubject = subjectRepository.findById(subjectId).get();
+		Course course = courseRepository.findById(courseId).get();;
+		List<Teacher> teacher = teacherRepository.findAll();
+		model.addAttribute("subject", currentSubject);
+		model.addAttribute("teacher", teacher);
+		model.addAttribute("course", course);
+		return "/courseSubject/add-teacher-to-subject";
+	}
+	// save the teacher to a course and subject
+		@PostMapping("/suject-teacher/save")
+		public String addteacher(@ModelAttribute("subject") Subject subject, Model model) {
+			subjectRepository.save(subject);
+			return "redirect:/courses-subjects";
+		}
+
+	
+	// show a list of courses by subject
+		@GetMapping("/subject-show/{subjectId}")
+		public String showCourseBySubject(@PathVariable Long subjectId, @ModelAttribute("subject") Subject subject,
+				Model model) {
+			Subject existingSubject = subjectRepository.findById(subjectId).get();
+			List<Course> course = courseRepository.findBySubjectId(subjectId);
+			model.addAttribute("subject", existingSubject);
+			model.addAttribute("course", course);
+			return "/courseSubject/show-subject-courses";
+		}
 }

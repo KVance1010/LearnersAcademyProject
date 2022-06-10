@@ -40,9 +40,9 @@
 					<td th:text="${teacher.email}"></td>
 					<td>
 						<a th:href="@{/teachers/edit/{teacherId}(teacherId=${teacher.teacherId})}"
-							class="btn btn-primary">Update</a>
+							class="btn btn-primary">Update</a>	
 						<a th:href="@{/teacher-subjects/{teacherId}(teacherId=${teacher.teacherId})}"
-							class="btn btn-info">Add Subjects taught</a>
+							class="btn btn-info">Add Courses to Subjects</a>
 						<a th:href="@{/teachers/{teacherId}(teacherId=${teacher.teacherId})}"
 							class="btn btn-danger">Delete</a>
 

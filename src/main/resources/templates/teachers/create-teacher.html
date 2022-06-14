@@ -42,8 +42,12 @@
 						<div th:replace="layouts :: phoneNumber"> </div>
 
 						<div th:replace="layouts :: email"> </div>
+						
+						<div th:replace="layouts :: password"> </div>
+
 						<hr>
 
+						<h3> Select All Current Subjects</h3>
 
 						<div class="form-group row">
 							<label class="col-sm-8 text-left"></label>
@@ -56,25 +60,7 @@
 								</th:block>
 							</div>
 						</div>
-<!--                      this is a different style of check boxes very much the same 
-						 	<div >
-							<div th:each="subject : ${subject}" >
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="checkbox" th:field="*{subjects}"   
-										th:value="${subject.subjectId}"/>
-									<label class="form-check-label" th:text="${subject.subjectName}"></label>
-								</div>
-							</div>
-						</div>
-						
--->
-<!--                    drop down menu
-						<select th:field="*{subjects}">
-							<option th:each="subject : ${subject}" th:value="${subject.subjectId}"
-								th:text="${subject.subjectName}">
-							</option>
-						</select>   
--->
+
 						<br>
 
 						<div th:replace="layouts :: footerButton"> </div>

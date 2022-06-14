@@ -51,11 +51,12 @@
 					<td th:text="${course.courseId}"></td>
 					<td th:text="${course.courseName}"></td>
 
-					<!-- *****************TODO: need to add  TEACHERS and Number of student  *****************-->
+<!-- *****************TODO: need to add  TEACHERS  *****************-->
 
-
+					<!-- <td th:text="${teacherCourse[1]}"></td> -->
+					
 					<td></td>
-					<td></td>
+					<td th:text="${course.students.size()}" ></td>
 
 					<td>
 

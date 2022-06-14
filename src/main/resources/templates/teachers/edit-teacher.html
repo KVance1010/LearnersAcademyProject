@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeLeafe.org">
-            <!-- Head -->
+<!-- Head -->
+
 <head th:replace="layouts :: head"></head>
 
 <body>
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		
+
 		<!-- Brand Link -->
 		<a th:replace="layouts :: brand"></a>
 
@@ -31,7 +32,8 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
 				<h1 class="text-center"> Update Instructor </h1>
 				<div class="card-body">
-					<form th:action="@{/teachers/{teacherId} (teacherId=${teacher.teacherId})}" th:object="${teacher}" method="POST">
+					<form th:action="@{/teachers/{teacherId} (teacherId=${teacher.teacherId})}" th:object="${teacher}"
+						method="POST">
 
 						<div th:replace="layouts :: firstName"> </div>
 
@@ -40,8 +42,10 @@
 						<div th:replace="layouts :: phoneNumber"> </div>
 
 						<div th:replace="layouts :: email"> </div>
-
-						<div th:replace= "layouts :: footerButton"> </div>
+						
+						<div th:replace="layouts :: password"> </div>
+						
+						<div th:replace="layouts :: footerButton"> </div>
 
 					</form>
 				</div>

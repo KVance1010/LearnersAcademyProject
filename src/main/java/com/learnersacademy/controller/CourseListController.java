@@ -26,27 +26,16 @@ public class CourseListController {
 
 	@Autowired
 	SubjectRepository subjectRepository;
-	
+
 	@Autowired
 	TeacherRepository teacherRepository;
 
 	// Main list of courses and subjects
 	@GetMapping("/courses-subjects")
 	public String listCoursesAndSubjects(Model model) {
-		
+
 		List<Course> course = courseRepository.findAll();
-		// this is not needed
-		if (course != null) {
-			model.addAttribute("condition2", Boolean.TRUE);
-		} else {
-			model.addAttribute("condition2", Boolean.FALSE);
-		}
 		List<Subject> subject = subjectRepository.findAll();
-		if (subject != null) {
-			model.addAttribute("condition1", Boolean.TRUE);
-		} else {
-			model.addAttribute("condition1", Boolean.FALSE);
-		}
 		model.addAttribute("subject", subject);
 		model.addAttribute("course", course);
 		return "/courseSubject/course-subject-list";
@@ -59,7 +48,14 @@ public class CourseListController {
 		return "redirect:/courses-subjects";
 	}
 
-	// Add a Subject
+	// Delete a Course
+	@GetMapping("/course-delete/{courseId}")
+	public String deleteCourse(@PathVariable Long courseId) {
+		courseRepository.deleteById(courseId);
+		return "redirect:/courses-subjects";
+	}
+
+	// Create a Subject
 	@GetMapping("/subject-save")
 	public String addSubject(@RequestParam String subjectName) {
 		Subject subject = new Subject();
@@ -68,7 +64,7 @@ public class CourseListController {
 		return "redirect:/courses-subjects";
 	}
 
-	// create a course
+	// Create a course
 	@GetMapping("/new-course")
 	public String createCourse(Model model) {
 		Course course = new Course();
@@ -78,7 +74,7 @@ public class CourseListController {
 		return "/courseSubject/create-course";
 	}
 
-	// save the course
+	// Save the course
 	@PostMapping("/course/save")
 	public String createCourse(Course course, Model model) {
 		courseRepository.save(course);
@@ -87,31 +83,58 @@ public class CourseListController {
 
 	// Add a teacher to a subject and course
 	@GetMapping("/add-teacher/subject/{subjectId}/{courseId}")
-	public String AddTeacherToSubject(@PathVariable Long subjectId, @PathVariable Long courseId, @ModelAttribute("subject") Subject subject, Model model) {
+	public String AddTeacherToSubject(@PathVariable Long subjectId, @PathVariable Long courseId,
+			@ModelAttribute("subject") Subject subject, Model model) {
 		Subject currentSubject = subjectRepository.findById(subjectId).get();
-		Course course = courseRepository.findById(courseId).get();;
-		List<Teacher> teacher = teacherRepository.findAll();
+		Course course = courseRepository.findById(courseId).get();
+		;
+		List<Teacher> teacher = teacherRepository.findTeacherBySubjectId(subjectId);
 		model.addAttribute("subject", currentSubject);
 		model.addAttribute("teacher", teacher);
 		model.addAttribute("course", course);
 		return "/courseSubject/add-teacher-to-subject";
 	}
-	// save the teacher to a course and subject
-		@PostMapping("/suject-teacher/save")
-		public String addteacher(@ModelAttribute("subject") Subject subject, Model model) {
-			subjectRepository.save(subject);
-			return "redirect:/courses-subjects";
-		}
 
-	
+	// Save the teacher to a course and subject
+	@PostMapping("/suject-teacher/save")
+	public String addteacher(@ModelAttribute("subject") Subject subject, Model model) {
+		subjectRepository.save(subject);
+		return "redirect:/courses-subjects";
+	}
+
+	// Editing form for Course
+	@GetMapping("/course-edit/{courseId}")
+	public String editCourseForm(@PathVariable Long courseId, Model model) {
+		model.addAttribute("course", courseRepository.findById(courseId).get());
+		return "/courseSubject/edit-course";    
+	} 
+	// Update the course
+	@PostMapping("/course-update/{courseId}")
+	public String updateCourse(@PathVariable Long courseId, @ModelAttribute("course") Course course, Model model) {
+
+		Course existingCourse = courseRepository.findById(courseId).get();
+		existingCourse.setCourseName(course.getCourseName());
+		existingCourse.setDescription(course.getDescription());
+		courseRepository.save(existingCourse);
+		return "redirect:/courses-subjects";
+	}
+
 	// show a list of courses by subject
-		@GetMapping("/subject-show/{subjectId}")
-		public String showCourseBySubject(@PathVariable Long subjectId, @ModelAttribute("subject") Subject subject,
-				Model model) {
-			Subject existingSubject = subjectRepository.findById(subjectId).get();
-			List<Course> course = courseRepository.findBySubjectId(subjectId);
-			model.addAttribute("subject", existingSubject);
-			model.addAttribute("course", course);
-			return "/courseSubject/show-subject-courses";
-		}
+	@GetMapping("/subject-show/{subjectId}")
+	public String showCourseBySubject(@PathVariable Long subjectId, @ModelAttribute("subject") Subject subject,
+			Model model) {
+		Subject existingSubject = subjectRepository.findById(subjectId).get();
+		List<Course> course = courseRepository.findBySubjectId(subjectId);
+
+		// need to work on how to send the teacher id and course Id to the teacher
+		//HashMap<Course, String> teacherCourse = courseRepository.findTeachersCourse(subjectId);
+
+//**********	TODO:	Teacher teacher = courseRepository.findTeacherByCourseId(courseId)    ***************************
+
+		// model.addAttribute("teacherCourse", teacherCourse);
+		model.addAttribute("subject", existingSubject);
+		model.addAttribute("course", course);
+		//model.addAttribute("size", size);
+		return "/courseSubject/show-subject-courses";
+	}
 }

@@ -37,17 +37,17 @@ public class Subject {
 	@JoinTable(name = "teachers_subjects",
 	           joinColumns = @JoinColumn(name = "subject_id"),
 	           inverseJoinColumns = @JoinColumn(name = "teacher_id"))
-	private List<Teacher> teachers;
+    private List<Teacher> teachers;
 
 	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "subject")
-	private List <Course> coursesList;
-	
-	public Integer courseCount() {
-		return coursesList.size();
-	}
-	
+	private List<Course> coursesList;
+		
 	public void addTeacher(Teacher teacher) {
 		teachers.add(teacher);
+	}
+	
+	public void addCourse(Course course) {
+		coursesList.add(course);
 	}
 	
 

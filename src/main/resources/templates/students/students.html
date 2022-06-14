@@ -17,8 +17,6 @@
 
 		<div class="row">
 			<div class="col-lg-4">
-				<!-- this is how you make an anchor tag in ThymeLeafe -->
-				<!-- /students/new is for request url  ...  class is for bootstrap button-->
 				<a th:href="@{/students/new}" class="btn btn-primary btn-sm mb-4"> Add Student</a>
 			</div>
 		</div>
@@ -44,7 +42,11 @@
 					<td>
 						<a th:href="@{/students/edit/{studentId}(studentId=${student.studentId})}"
 							class="btn btn-primary">Update</a>
-
+							
+<!-- *****************TODO: need to add  Functionality to editing schedule *****************-->	
+						<a th:href="@{/students/edit/{studentId}(studentId=${student.studentId})}"
+							class="btn btn-success">Edit Schedule</a>
+							
 						<a th:href="@{/students/{studentId}(studentId=${student.studentId})}"
 							class="btn btn-danger">Delete</a>
 

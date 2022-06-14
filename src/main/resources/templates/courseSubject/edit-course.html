@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeafe.org">
+                <!-- Head -->
+<head th:replace="layouts :: head"></head>
+
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<!-- Brand Link -->
+		<a th:replace="layouts :: brand"></a>
+		
+		<!-- Navigation header Toggler/collapsibe Button -->
+	 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<!-- Nav bar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/courses-subjects}">Subject and Course List</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<br><br>
+
+
+	<div class = "container">
+                                  
+      <form th:action="@{/course-update/{courseId}}" th:object ="${course}"  method = "POST">
+                                                      
+         <input type = "text" placeholder = "Course Name" th:field = "${course.courseName}">
+         
+         <textarea th:type = "text" placeholder = "Enter course Description" th:field = "${course.description}" ></textarea>
+
+         <button type = "submit">Create Course</button>
+      </form>
+   </div>  
+   
+</body>
+
+</html>

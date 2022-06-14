@@ -36,8 +36,11 @@ public class Teacher {
 	private String lastName;
 	@Column(name = "phone_number")
 	private String phoneNumber;
-	@Column(name = "email", unique = true)
+	@Column(name = "email")
 	private String email;
+	@Column(name = "password")
+	private String password;
+	
 
 	@ManyToMany (cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)  
 	@JoinTable(name="teachers_subjects", 
@@ -45,11 +48,5 @@ public class Teacher {
     inverseJoinColumns = @JoinColumn(name="subject_id"))    
 	private List<Subject> subjects;
 	
-	public void addSubject(Subject subject) {
-		subjects.add(subject);
-	}
 	
-	public void deleteSubject(Subject subject) {
-		subjects.remove(subject);
-	}
 }

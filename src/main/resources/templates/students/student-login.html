@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeafe.org">
+
+<!-- Head -->
+
+<head th:replace="layouts :: head"></head>
+
+<body>
+	<nav th:fragment="nav-bar-header" class="navbar navbar-expand-md bg-dark navbar-dark">
+		<!-- Brand Link -->
+		<a class="navbar-brand" href="#"> Learner's Academy</a>
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<!-- Nav bar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+		</div>
+	</nav>
+	<br> <br>
+	<div class="row">
+		<h1 style="padding-left: 10%" th:text="'Welcome ' + ${student.firstName}"></h1>
+	</div>
+
+
+	<div class="card-body">
+	      
+	<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th> Course List</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="course: *{student.courses}">
+					<td th:text="${course.courseName}">
+					</td>
+				</tr>
+			</tbody>
+
+	</table> 
+		<h3> Student Information</h3>
+		<div class ="container">
+		<form th:action="@{/student/save/{studentId} (studentId=${student.studentId})}" th:object="${student}"
+			method= "POST">
+
+			<div th:replace="layouts :: firstName"> </div>
+
+			<div th:replace="layouts :: lastName"> </div>
+
+			<div th:replace="layouts :: phoneNumber"> </div>
+
+			<div th:replace="layouts :: email"> </div>
+
+			<div th:replace="layouts :: password"> </div>
+
+			<div th:replace="layouts :: footerButton"> </div>
+
+		</form>
+		</div>
+	</div>
+
+</body>
+
+</html>

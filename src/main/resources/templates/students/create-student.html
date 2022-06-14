@@ -38,6 +38,22 @@
 						<div th:replace="layouts :: phoneNumber"> </div>
 
 						<div th:replace="layouts :: email"> </div>
+						
+						<div th:replace="layouts :: password"> </div>
+						
+						<h3> Select All Current Subjects</h3>
+
+						<div class="form-group row">
+							<label class="col-sm-8 text-left"></label>
+							<div class="col-sm-8 text-left">
+								<th:block th:each="course : ${course}">
+									<div>
+										<input type="checkbox" th:text="${course.courseName}" th:field="*{courses}"
+											th:value="${course.courseId}" />
+									</div>
+								</th:block>
+							</div>
+						</div>
 
 						<div th:replace="layouts :: footerButton"> </div>
 

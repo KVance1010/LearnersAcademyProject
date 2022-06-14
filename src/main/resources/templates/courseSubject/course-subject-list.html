@@ -41,16 +41,14 @@
 					<th> Actions </th>
 				</tr>
 			</thead>
-			<tbody th:if="${condition1}">
+			<tbody>
 				<tr th:each="subject: ${subject}">
 					<td th:text="${subject.subjectName}"></td>
 					<td th:text="${subject.subjectId}"></td>
-					<td th:text="${subject.courseCount()}"
-					<td></td>
+					<td th:text="${subject.coursesList.size()}" <td></td>
 					<td>
 						<a th:href="@{/subject-show/{subjectId}(subjectId=${subject.subjectId})}"
 							class="btn btn-info">Show Courses</a>
-<!-- *****************TODO: need to add functionality to this button  *********************-->
 						<a th:href="@{/subject-delete/{subjectId}(subjectId=${subject.subjectId})}"
 							class="btn btn-danger">Delete</a>
 					</td>
@@ -86,23 +84,24 @@
 				<tr>
 					<th> Course ID </th>
 					<th> Name </th>
-					<th > Description </th>
+					<th> Description </th>
 					<th> Number of Students </th>
 					<th> Actions</th>
- 				</tr>
+				</tr>
 			</thead>
 
-			<tbody th:if="${condition2}">
+			<tbody>
 				<tr th:each="course: ${course}">
 					<td th:text="${course.courseId}"></td>
 					<td th:text="${course.courseName}"></td>
 					<td th:text="${course.description}"></td>
-					<td></td>
+					<td th:text="${course.students.size()}" ></td>
 					<td>
-<!-- *****************TODO: need to add functionality to this button  *********************-->
-					   <button class="btn btn-primary">Update</button>
-<!-- *****************TODO: need to add functionality to this button  **********************-->
-					   <button class="btn btn-danger">Delete</button>
+						<a th:href="@{/course-edit/{courseId}(courseId=${course.courseId})}"
+							class="btn btn-primary">Update</a>
+						
+						<a th:href="@{/course-delete/{courseId}(courseId=${course.courseId})}"
+							class="btn btn-danger">Delete</a>
 					</td>
 				</tr>
 			</tbody>

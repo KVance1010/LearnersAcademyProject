@@ -47,22 +47,20 @@
 			</thead>
 
 			<tbody>
-				<tr th:each="course: ${course}">
-					<td th:text="${course.courseId}"></td>
-					<td th:text="${course.courseName}"></td>
 
-<!-- *****************TODO: need to add  TEACHERS  *****************-->
+				<tr th:each="tc: ${teacherCourse}">
+					<td th:text="${tc.courseId !=null} ? ${tc.courseId} : 'No Current Courses'"></td>
+					<td th:text="${tc.courseName !=null} ? ${tc.courseName} : ' '"></td>
+					<td
+						th:text="${tc.lastName !=null} ? ${tc.lastName} + ', ' + ${tc.firstName} : 'No Current Teacher' ">
+					</td>
 
-					<!-- <td th:text="${teacherCourse[1]}"></td> -->
-					
+<!-- *****************TODO: need number of students ***************** -->
 					<td></td>
-					<td th:text="${course.students.size()}" ></td>
 
 					<td>
-
 						<a th:href="@{/add-teacher/subject/{subjectId}/{courseId}
-						(subjectId=${subject.subjectId}, courseId=${course.courseId})}"
-							class="btn btn-primary">Update</a>
+						(subjectId=${subject.subjectId}, courseId=${tc.courseId})}" class="btn btn-primary">Update</a>
 
 					</td>
 				</tr>

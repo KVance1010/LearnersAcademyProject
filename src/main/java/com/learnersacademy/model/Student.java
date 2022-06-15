@@ -40,8 +40,6 @@ public class Student {
 	@Column(name = "password")
 	private String password;
 	
-//	@Column (name = "role")
-//	private String role = "Student";
 	
 	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST,
 			   CascadeType.MERGE}, fetch = FetchType.LAZY)
@@ -49,5 +47,12 @@ public class Student {
 	           joinColumns = @JoinColumn(name = "student_id"),
 	           inverseJoinColumns = @JoinColumn(name = "course_id"))
 	private List<Course> courses;
+	
+	public void deleteCourse(Course course) {
+		courses.remove(course);
+	}
+	public void addCourse(Course course) {
+		courses.add(course);
+	}
 
 }

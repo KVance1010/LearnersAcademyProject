@@ -48,5 +48,11 @@ public class Teacher {
     inverseJoinColumns = @JoinColumn(name="subject_id"))    
 	private List<Subject> subjects;
 	
+	public void deleteSubject(Subject subject) {
+		subjects.remove(subject);
+	}
+	public void addSubject(Subject subject) {
+		subjects.add(subject);
+	}
 	
 }

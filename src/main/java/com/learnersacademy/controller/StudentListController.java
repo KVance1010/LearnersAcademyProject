@@ -53,6 +53,14 @@ public class StudentListController {
 		model.addAttribute("student", studentRepository.findById(studentId).get());
 		return "/students/edit-student";    
 	} 
+	
+	// Adding Courses to the Student
+		@GetMapping("/students-add-course/{studentId}")
+		public String addCourseToStudent(@PathVariable Long studentId, Model model) {
+			model.addAttribute("course", courseRepository.findAll());
+			model.addAttribute("student", studentRepository.findById(studentId).get());
+			return "/students/add-course-student";    
+		} 
 
 	// Saving the Edited students information
 	@PostMapping("/students/{studentId}")
@@ -66,12 +74,33 @@ public class StudentListController {
 		studentRepository.save(existingStudent);
 		return "redirect:/students";
 	}
+	
 
+	// Adding a course
+	@GetMapping("/add-course/{studentId}/{courseId}")
+	public String addCourse(@PathVariable Long studentId, @PathVariable Long courseId) {
+		Course course = courseRepository.findById(courseId).get();
+		Student student = studentRepository.findById(studentId).get();
+		student.addCourse(course);
+		studentRepository.save(student);
+		return "redirect:/students";
+	}
+	
 	// Deletes the Students information
 	@GetMapping("/students/{studentId}")
 	public String deleteStudent(@PathVariable Long studentId) {
 		studentRepository.deleteById(studentId);
 		return "redirect:/students";
 	}
+	
+	// Deletes Course from Student
+		@GetMapping("/student-delete-course/{studentId}/{courseId}")
+		public String deleteStudentCourse(@PathVariable Long studentId, @PathVariable Long courseId) {
+			Course course = courseRepository.findById(courseId).get();
+			Student student = studentRepository.findById(studentId).get();
+			student.deleteCourse(course);
+			studentRepository.save(student);
+			return "redirect:/students";
+		}
 
 }

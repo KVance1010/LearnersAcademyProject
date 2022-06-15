@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://thymeLeafe.org">
-
-<!-- Head -->
-
+              
+               <!-- Head -->
 <head th:replace="layouts :: head"></head>
 
 <body>
-	<!-- Main NavigationBar Header -->
-	<nav th:replace="layouts :: nav-bar-header"></nav>
+          <!-- Main NavigationBar Header -->
+	<nav th:replace="layouts ::nav-bar-header"></nav>
 
 
 	<div class="container">
@@ -98,7 +96,7 @@
 					<td th:text="${course.students.size()}" ></td>
 					<td>
 						<a th:href="@{/course-edit/{courseId}(courseId=${course.courseId})}"
-							class="btn btn-primary">Update</a>
+							class="btn btn-primary">Update Course</a>
 						
 						<a th:href="@{/course-delete/{courseId}(courseId=${course.courseId})}"
 							class="btn btn-danger">Delete</a>

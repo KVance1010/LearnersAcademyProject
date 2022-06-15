@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.learnersacademy.dao.CourseRepository;
 import com.learnersacademy.dao.SubjectRepository;
 import com.learnersacademy.dao.TeacherRepository;
+import com.learnersacademy.dto.TeacherCourse;
 import com.learnersacademy.model.Course;
 import com.learnersacademy.model.Subject;
 import com.learnersacademy.model.Teacher;
@@ -87,7 +88,6 @@ public class CourseListController {
 			@ModelAttribute("subject") Subject subject, Model model) {
 		Subject currentSubject = subjectRepository.findById(subjectId).get();
 		Course course = courseRepository.findById(courseId).get();
-		;
 		List<Teacher> teacher = teacherRepository.findTeacherBySubjectId(subjectId);
 		model.addAttribute("subject", currentSubject);
 		model.addAttribute("teacher", teacher);
@@ -111,7 +111,6 @@ public class CourseListController {
 	// Update the course
 	@PostMapping("/course-update/{courseId}")
 	public String updateCourse(@PathVariable Long courseId, @ModelAttribute("course") Course course, Model model) {
-
 		Course existingCourse = courseRepository.findById(courseId).get();
 		existingCourse.setCourseName(course.getCourseName());
 		existingCourse.setDescription(course.getDescription());
@@ -119,22 +118,14 @@ public class CourseListController {
 		return "redirect:/courses-subjects";
 	}
 
-	// show a list of courses by subject
+	// Show a list of Courses and Teachers by Subject
 	@GetMapping("/subject-show/{subjectId}")
 	public String showCourseBySubject(@PathVariable Long subjectId, @ModelAttribute("subject") Subject subject,
 			Model model) {
 		Subject existingSubject = subjectRepository.findById(subjectId).get();
-		List<Course> course = courseRepository.findBySubjectId(subjectId);
-
-		// need to work on how to send the teacher id and course Id to the teacher
-		//HashMap<Course, String> teacherCourse = courseRepository.findTeachersCourse(subjectId);
-
-//**********	TODO:	Teacher teacher = courseRepository.findTeacherByCourseId(courseId)    ***************************
-
-		// model.addAttribute("teacherCourse", teacherCourse);
+		List<TeacherCourse> teacherAndCourse = subjectRepository.findTeacherAndCourseId(subjectId);
+		model.addAttribute("teacherCourse", teacherAndCourse);
 		model.addAttribute("subject", existingSubject);
-		model.addAttribute("course", course);
-		//model.addAttribute("size", size);
 		return "/courseSubject/show-subject-courses";
 	}
 }

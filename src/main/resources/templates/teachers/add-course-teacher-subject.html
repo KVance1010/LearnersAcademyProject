@@ -18,7 +18,7 @@
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/teachers}">Teachers</a>
+					<a class="nav-link" th:href="@{/courses-subjects}">Subject and Course List</a>
 				</li>
 			</ul>
 		</div>
@@ -32,15 +32,13 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
 				<h1 class="text-center"> Add Teacher to Course </h1>
 				<div class="card-body">
-					<form th:action="@{/suject-teacher/save }" th:object="${subject}" method="POST">
+					<form th:action="@{/teachers-save-course }" th:object="${subject}" method="POST">
 
 
 						<div class="form-group">
 							<label> Subject </label>
 							<input name="Subject" th:field="*{subjectName}" class="form-control" />
 						</div>
-
-						<hr>
 
 						<div class="form-group">
 							<div th:each="course : ${course}">

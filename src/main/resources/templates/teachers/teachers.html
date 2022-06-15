@@ -41,13 +41,9 @@
 					<td th:text="${teacher.email}"></td>
 					<td>
 						<a th:href="@{/teachers/edit/{teacherId}(teacherId=${teacher.teacherId})}"
-							class="btn btn-primary">Update</a>
-							
-<!-- *****************TODO: need to add Subjects feature  ***************************************-->							
+							class="btn btn-primary">Update</a>							
 						<a th:href="@{/teacher-subjects/{teacherId}(teacherId=${teacher.teacherId})}"
-							class="btn btn-info">Add Subject</a>
-						<a th:href="@{/teacher-subjects/{teacherId}(teacherId=${teacher.teacherId})}"
-							class="btn btn-success">Add Courses</a>
+							class="btn btn-success">Add Subject</a>
 						<a th:href="@{/teachers/{teacherId}(teacherId=${teacher.teacherId})}"
 							class="btn btn-danger">Delete</a>
 

@@ -17,10 +17,9 @@ import com.learnersacademy.dao.TeacherRepository;
 import com.learnersacademy.dto.TeacherCourse;
 import com.learnersacademy.model.Course;
 import com.learnersacademy.model.Subject;
-import com.learnersacademy.model.Teacher;
 
 @Controller
-public class CourseListController {
+public class CourseListController{
 
 	@Autowired
 	CourseRepository courseRepository;
@@ -82,18 +81,19 @@ public class CourseListController {
 		return "redirect:/courses-subjects";
 	}
 
-	// Add a teacher to a subject and course
-	@GetMapping("/add-teacher/subject/{subjectId}/{courseId}")
-	public String AddTeacherToSubject(@PathVariable Long subjectId, @PathVariable Long courseId,
-			@ModelAttribute("subject") Subject subject, Model model) {
-		Subject currentSubject = subjectRepository.findById(subjectId).get();
-		Course course = courseRepository.findById(courseId).get();
-		List<Teacher> teacher = teacherRepository.findTeacherBySubjectId(subjectId);
-		model.addAttribute("subject", currentSubject);
-		model.addAttribute("teacher", teacher);
-		model.addAttribute("course", course);
-		return "/courseSubject/add-teacher-to-subject";
-	}
+//	                  Took this out for now will need to fix HTML to show teachers not courses
+//	// Add a teacher to a subject and course
+//	@GetMapping("/add-teacher/subject/{subjectId}/{courseId}")
+//	public String AddTeacherToSubject(@PathVariable Long subjectId, @PathVariable Long courseId,
+//			@ModelAttribute("subject") Subject subject, Model model) {
+//		Subject currentSubject = subjectRepository.findById(subjectId).get();
+//		Course course = courseRepository.findById(courseId).get();
+//		List<Teacher> teacher = teacherRepository.findTeacherBySubjectId(subjectId);
+//		model.addAttribute("subject", currentSubject);
+//		model.addAttribute("teacher", teacher);
+//		model.addAttribute("course", course);
+//		return "/courseSubject/add-teacher-to-subject";
+//	}
 
 	// Save the teacher to a course and subject
 	@PostMapping("/suject-teacher/save")

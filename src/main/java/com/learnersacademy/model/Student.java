@@ -54,5 +54,9 @@ public class Student {
 	public void addCourse(Course course) {
 		courses.add(course);
 	}
+	
+	public Integer numStudents(Course course) {
+		return course.numberOfStudents(); 
+	}
 
 }

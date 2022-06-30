@@ -6,4 +6,5 @@ public interface TeacherCourse {
 	public String getCourseName();
 	public String getLastName();
 	public String getFirstName();
+	public int getNumStudents();
 }

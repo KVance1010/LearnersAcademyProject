@@ -43,7 +43,7 @@ public class Course {
 	           inverseJoinColumns = @JoinColumn(name = "student_id"))
 	private List<Student> students;
 	
-	public int numberOfStudents(List <Student> students) {
+	public Integer numberOfStudents() {
 		return students.size();
 	}
 	

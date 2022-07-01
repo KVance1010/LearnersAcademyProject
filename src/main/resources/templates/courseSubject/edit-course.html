@@ -28,13 +28,13 @@
 
 	<div class = "container">
                                   
-      <form th:action="@{/course-update/{courseId}}" th:object ="${course}"  method = "POST">
+      <form th:action="@{/course-update/{courseId} (courseId=${course.courseId})}" th:object ="${course}"  method = "POST">
                                                       
          <input type = "text" placeholder = "Course Name" th:field = "${course.courseName}">
          
          <textarea th:type = "text" placeholder = "Enter course Description" th:field = "${course.description}" ></textarea>
 
-         <button type = "submit">Create Course</button>
+         <button type = "submit">Update</button>
       </form>
    </div>  
    

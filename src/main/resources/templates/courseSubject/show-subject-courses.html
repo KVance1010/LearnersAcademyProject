@@ -42,19 +42,28 @@
 					<th> Course Name</th>
 					<th> Teacher </th>
 					<th> Number of Students</th>
-				<!--	<th> Actions </th> -->
+					<!--	<th> Actions </th> -->
 				</tr>
 			</thead>
 
 			<tbody>
 
-				<tr th:each="tc: ${teacherCourse}">
-					<td th:text="${tc.courseId !=null} ? ${tc.courseId} : 'No Current Courses'"></td>
-					<td th:text="${tc.courseName !=null} ? ${tc.courseName} : ' '"></td>
-					<td th:text="${tc.lastName !=null} ? ${tc.lastName} + ', ' + ${tc.firstName} : 'No Current Teacher' "></td>
-					<td th:text="${tc.numStudents}"></td>
+			<!--	<tr th:each="tc: ${teacherCourse}">
+					<td th:text="${tc.courseId}"></td>
+					<td th:text="${tc.courseName} "></td>
+					<td
+						th:text="${tc.lastName}">
+					</td>
+					<td th:text="${tc.numStudents}"></td> -->
 
-			<!--	Took out the update teacher option code not finished
+
+		        <tr th:each="tc: ${teacherCourse}">
+					<td th:text="${tc.courseId}"></td>
+					<td th:text="${tc.courseName}"></td>
+					<td th:text="${tc.lastName != null}    ? ${tc.lastName} + ', ' + ${tc.firstName} : 'No Current Teacher' "></td>
+					<td th:text="${tc.numStudents != null} ? ${tc.numStudents} : ' 0 ' "></td>
+
+				<!--Took out the update teacher option code not finished
 					<td>
 						<a th:href="@{/add-teacher/subject/{subjectId}/{courseId}
 						(subjectId=${subject.subjectId}, courseId=${tc.courseId})}" class="btn btn-primary">Update</a>

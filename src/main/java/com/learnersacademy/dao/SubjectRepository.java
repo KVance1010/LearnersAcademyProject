@@ -24,5 +24,5 @@ public interface SubjectRepository extends JpaRepository<Subject, Long> {
 			+ "INNER JOIN subjects AS s USING (subject_id) " + "INNER JOIN courses AS c USING (subject_id) "
 			+ "INNER JOIN courses_students AS cs USING (course_id) " + "WHERE s.subject_id = :subjectId "
 			+ "Group by c.course_name")
-	public List<TeacherCourse> findTeacherAndCourseId(Long subjectId);
+	public List<TeacherCourse> findTeacherAndCourseBySubject(Long subjectId);
 }

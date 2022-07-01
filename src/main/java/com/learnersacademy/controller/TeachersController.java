@@ -10,27 +10,27 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.learnersacademy.dao.CourseRepository;
-import com.learnersacademy.dao.SubjectRepository;
-import com.learnersacademy.dao.TeacherRepository;
 import com.learnersacademy.model.Course;
 import com.learnersacademy.model.Subject;
 import com.learnersacademy.model.Teacher;
+import com.learnersacademy.service.CourseService;
+import com.learnersacademy.service.SubjectService;
+import com.learnersacademy.service.TeacherService;
 
 @Controller
 public class TeachersController {
 
 	@Autowired
-	TeacherRepository teacherRepository;
+	private TeacherService teacherService;
 	@Autowired
-	SubjectRepository subjectRepository;
+	private SubjectService subjectService;
 	@Autowired
-	CourseRepository courseRepository;
+	private CourseService courseService;
 
 	// Main Teacher page
 	@GetMapping("/teachers")
 	public String listTeachers(Model model) {
-		model.addAttribute("teachers", teacherRepository.findAll());
+		model.addAttribute("teachers", teacherService.getAllTeachers());
 		return "/teachers/teachers";
 	}
 
@@ -38,7 +38,7 @@ public class TeachersController {
 	@GetMapping("/teachers/new")
 	public String createTeacherForm(Model model) {
 		Teacher teacher = new Teacher();
-		List<Subject> subject = (List<Subject>) subjectRepository.findAll();
+		List<Subject> subject = (List<Subject>) subjectService.getAllSubjects();
 		model.addAttribute("teacher", teacher);
 		model.addAttribute("subject", subject);
 		return "/teachers/create-teacher";
@@ -47,53 +47,53 @@ public class TeachersController {
 	// Teacher Save method
 	@PostMapping("/teachers-save")
 	public String saveTeacher(@ModelAttribute("teacher") Teacher teacher, Model model) {
-		teacherRepository.save(teacher);
+		teacherService.saveTeacher(teacher);
 		return "redirect:/teachers";
 	}
 	
 	// Teacher/Course Save method
 		@PostMapping("/teachers-save-course")
 		public String saveCourse(@ModelAttribute("subject") Subject subject, Model model) {
-			subjectRepository.save(subject);
+			subjectService.saveSubject(subject);
 			return "redirect:/teachers";
 		}
 
 	// Editing the Teacher form
 	@GetMapping("/teachers/edit/{teacherId}")
 	public String editTeacherForm(@PathVariable Long teacherId, Model model) {
-		model.addAttribute("subject", subjectRepository.findAll());
-		model.addAttribute("teacher", teacherRepository.findById(teacherId).get());
+		model.addAttribute("subject", subjectService.getAllSubjects());
+		model.addAttribute("teacher", teacherService.getTeacherById(teacherId));
 		return "/teachers/edit-teacher";
 	}
 
 	// Updating the Teacher form
 	@PostMapping("/teachers/{teacherId}")
 	public String updateTeacher(@PathVariable Long teacherId, @ModelAttribute("teacher") Teacher teacher, Model model) {
-		Teacher existingTeacher = teacherRepository.findById(teacherId).get();
+		Teacher existingTeacher = teacherService.getTeacherById(teacherId);
 		existingTeacher.setFirstName(teacher.getFirstName());
 		existingTeacher.setLastName(teacher.getLastName());
 		existingTeacher.setPhoneNumber(teacher.getPhoneNumber());
 		existingTeacher.setEmail(teacher.getEmail());
 		existingTeacher.setPassword(teacher.getPassword());
-		teacherRepository.save(existingTeacher);
+		teacherService.saveTeacher(existingTeacher);
 		return "redirect:/teachers";
 	}
 
 	// Deleting the teacher form
 	@GetMapping("/teachers/{teacherId}")
 	public String deleteTeacher(@PathVariable Long teacherId) {
-		teacherRepository.deleteById(teacherId);
+		teacherService.deleteTeacherById(teacherId);
 		return "redirect:/teachers";
 	}
 
 	// Adding a subject to what the teacher teaches
 	@GetMapping("/teacher-subjects/{teacherId}")
 	public String addSubject(@PathVariable Long teacherId, Model model) {
-		Teacher existingTeacher = teacherRepository.findById(teacherId).get();
-		List<Subject> teachersSubject = subjectRepository.findSubjectsByTeacherId(teacherId);
-//      List<Course> course = courseRepository.findCoursesByTeacherId(teacherId);
-		List<Subject> allSubjeects = subjectRepository.findAll();
-		model.addAttribute("allSubjects", allSubjeects);
+		Teacher existingTeacher = teacherService.getTeacherById(teacherId);
+		List<Subject> teachersSubject = subjectService.getSubjectByTeacherID(teacherId);
+//      List<Course> course = courseService.findCoursesByTeacherId(teacherId);
+		List<Subject> allSubjects = subjectService.getAllSubjects();
+		model.addAttribute("allSubjects", allSubjects);
 //      model.addAttribute("course", course);
 		model.addAttribute("teacher", existingTeacher);
 		model.addAttribute("teachersSubjects", teachersSubject);
@@ -103,18 +103,18 @@ public class TeachersController {
 	// Adding a subject
 	@GetMapping("/add-subject/{teacherId}/{subjectId}")
 	public String addsubject(@PathVariable Long teacherId, @PathVariable Long subjectId) {
-		Subject subject = subjectRepository.findById(subjectId).get();
-		Teacher teacher = teacherRepository.findById(teacherId).get();
+		Subject subject = subjectService.getSubjectById(subjectId);
+		Teacher teacher = teacherService.getTeacherById(teacherId);
 		teacher.addSubject(subject);
-		teacherRepository.save(teacher);
+		teacherService.saveTeacher(teacher);
 		return "redirect:/teachers";
 	}
 	
 	   // Adding a course to subject
 		@GetMapping("/subject-add-course/{subjectId}")
 		public String addCourseToSubject(@PathVariable Long subjectId, Model model) {
-			Subject subject = subjectRepository.findById(subjectId).get();
-			List<Course> course = courseRepository.findBySubjectId(subjectId);
+			Subject subject = subjectService.getSubjectById(subjectId);
+			List<Course> course = courseService.getCoursesBySubjectId(subjectId);
 			model.addAttribute("subject", subject);
 			model.addAttribute("course", course);
 			return "/teachers/add-course-teacher-subject";
@@ -123,10 +123,10 @@ public class TeachersController {
 	// Deletes subject from teacher
 	@GetMapping("/delete-subject/{teacherId}/{subjectId}")
 	public String deleteStudentCourse(@PathVariable Long teacherId, @PathVariable Long subjectId) {
-		Subject subject = subjectRepository.findById(subjectId).get();
-		Teacher teacher = teacherRepository.findById(teacherId).get();
+		Subject subject = subjectService.getSubjectById(subjectId);
+		Teacher teacher = teacherService.getTeacherById(teacherId);
 		teacher.deleteSubject(subject);
-		teacherRepository.save(teacher);
+		teacherService.saveTeacher(teacher);
 		return "redirect:/teachers";
 	}
 

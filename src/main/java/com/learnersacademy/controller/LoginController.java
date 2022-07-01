@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.learnersacademy.dao.StudentRepository;
-import com.learnersacademy.dao.TeacherRepository;
 import com.learnersacademy.model.Student;
 import com.learnersacademy.model.Teacher;
 import com.learnersacademy.service.LoginService;
+import com.learnersacademy.service.StudentService;
+import com.learnersacademy.service.TeacherService;
 
 @Controller
 public class LoginController {
 
 	@Autowired
-	LoginService loginService;
+	private LoginService loginService;
 
 	@Autowired
-	StudentRepository studentRepository;
+	private StudentService studentService;
 
 	@Autowired
-	TeacherRepository teacherRepository;
+	private TeacherService teacherService;
 
 	@GetMapping("/")
 	public String loginPage(Model model) {
@@ -64,25 +64,25 @@ public class LoginController {
 	
 	@PostMapping("/student/save/{studentId}")
 	public String updateStudent(@PathVariable Long studentId, @ModelAttribute("student") Student student, Model model) {
-		Student existingStudent = studentRepository.findById(studentId).get();
+		Student existingStudent = studentService.getStudentById(studentId);
 		existingStudent.setFirstName(student.getFirstName());
 		existingStudent.setLastName(student.getLastName());
 		existingStudent.setPhoneNumber(student.getPhoneNumber());
 		existingStudent.setEmail(student.getEmail());
 		existingStudent.setPassword(student.getPassword());
-		studentRepository.save(existingStudent);
+		studentService.saveStudent(existingStudent);
 		return "/login/update-success";
 	}
 	
 	@PostMapping("/teacher-save/{teacherId}")
 	public String updateteacher(@PathVariable Long teacherId, @ModelAttribute("teacher") Teacher teacher, Model model) {
-		Teacher existingTeacher = teacherRepository.findById(teacherId).get();
+		Teacher existingTeacher = teacherService.getTeacherById(teacherId);
 		existingTeacher.setFirstName(teacher.getFirstName());
 		existingTeacher.setLastName(teacher.getLastName());
 		existingTeacher.setPhoneNumber(teacher.getPhoneNumber());
 		existingTeacher.setEmail(teacher.getEmail());
 		existingTeacher.setPassword(teacher.getPassword());
-		teacherRepository.save(existingTeacher);
+		teacherService.saveTeacher(existingTeacher);
 		return "/login/update-success";
 	}	
 }
